@@ -196,7 +196,7 @@ function actualizarTablaUsuarios() {
       <td>${user.rol}</td>
       <td>
         <button type="button" class="btn-primario" onclick="editarUsuario('${userKey}')" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">edit</span> Editar</button>
-        <button type="button" class="btn-secundario" onclick="eliminarUsuario('${userKey}')" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Baja</button>
+        <button type="button" class="btn-danger" onclick="eliminarUsuario('${userKey}')" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Baja</button>
       </td>
     `;
     tablaUsuariosBody.appendChild(fila);
@@ -281,7 +281,16 @@ function editarUsuario(userKey) {
 function actualizarTablasNotas() {
   if (tablaNotasBody) {
     tablaNotasBody.innerHTML = "";
-    listaNotas.forEach((n) => {
+    
+    // Si el usuario es estudiante, filtramos las notas para mostrar solo las suyas
+    let notasEstudiante = listaNotas;
+    if (usuarioSesion && usuarioSesion.rol === "estudiante") {
+      notasEstudiante = listaNotas.filter(
+        (n) => n.estudiante.trim().toLowerCase() === usuarioSesion.nombre.trim().toLowerCase()
+      );
+    }
+
+    notasEstudiante.forEach((n) => {
       const fila = document.createElement("tr");
       fila.innerHTML = `
         <td>${n.estudiante}</td>
@@ -302,7 +311,7 @@ function actualizarTablasNotas() {
         <td><strong>${n.nota}</strong></td>
         <td>
           <button type="button" class="btn-primario" onclick="editarNota(${n.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">edit</span> Editar</button>
-          <button type="button" class="btn-secundario" onclick="eliminarNota(${n.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Eliminar</button>
+          <button type="button" class="btn-danger" onclick="eliminarNota(${n.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Eliminar</button>
         </td>
       `;
       tablaGestionNotasBody.appendChild(fila);
@@ -419,7 +428,7 @@ function actualizarComunicados() {
       botonesAdmin = `
         <div style="margin-top: 0.75rem;">
           <button type="button" class="btn-primario" onclick="editarComunicado(${c.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; margin-right: 5px;"><span class="material-symbols-outlined" style="font-size: 1rem;">edit</span> Editar</button>
-          <button type="button" class="btn-secundario" onclick="eliminarComunicado(${c.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Eliminar</button>
+          <button type="button" class="btn-danger" onclick="eliminarComunicado(${c.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Eliminar</button>
         </div>
       `;
     }

@@ -10,6 +10,7 @@ Todos los cambios notables realizados en este proyecto están registrados en est
 - **Gestión de Calificaciones en Panel Admin:** El administrador ahora dispone de una tabla con el historial de todas las calificaciones registradas por los docentes, con permisos exclusivos para editarlas o eliminarlas mediante modales de SweetAlert2.
 - **Gestión de Anuncios en el Tablón:** El administrador ahora puede crear nuevos comunicados oficiales (usando el botón "+ Nuevo Comunicado" que solo él visualiza) y editar/eliminar comunicados directamente en el tablón general.
 - Estructuración dinámica de datos para notas y comunicados en memoria mediante arreglos JS.
+- **Filtrado de Calificaciones por Estudiante:** Corrección en la tabla de notas del estudiante para que cada alumno visualice únicamente los registros de calificaciones que le corresponden (asociados a su nombre completo), restringiendo el acceso a las calificaciones de los demás compañeros.
 - **Rediseño Profesional Académico:** Renovación total de la hoja de estilos en `styles.css` adoptando una paleta de colores institucional (azul marino, azul brillante e insignias doradas), tipografías modernas desde Google Fonts (`Outfit` para encabezados e `Inter` para texto corrido), bordes redondeados premium, transiciones interactivas en tarjetas/botones y diseño de tablas optimizado para visualización de registros escolares.
 
 ---
