@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intranet Escolar — Institución Educativa</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Encabezado de la Intranet -->
+  <header class="header-principal">
+    <h1>Intranet Escolar</h1>
+    <div id="info-usuario" class="info-usuario oculta">
+      <span id="nombre-usuario"></span> (<strong id="rol-usuario"></strong>)
+      <button id="btn-logout" type="button" class="btn-secundario">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <main class="contenedor-principal">
+
+    <!-- 1. Pantalla de Login -->
+    <section id="vista-login" class="tarjeta">
+      <h2>Iniciar Sesión</h2>
+      <form id="form-login">
+        <div class="campo">
+          <label for="usuario">Usuario:</label>
+          <input type="text" id="usuario" placeholder="Ej. admin, docente1, alumno1" required>
+        </div>
+        <div class="campo">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primario">Ingresar</button>
+      </form>
+
+      <!-- Guía rápida de pruebas -->
+      <div class="nota-prueba">
+        <p><strong>Cuentas de prueba (Password: 1234):</strong></p>
+        <ul>
+          <li><strong>Admin:</strong> <code>admin</code></li>
+          <li><strong>Docente:</strong> <code>docente1</code></li>
+          <li><strong>Estudiante/Familia:</strong> <code>alumno1</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. Panel de Administración -->
+    <section id="panel-admin" class="tarjeta vista-panel oculta">
+      <h2>Panel de Administración</h2>
+      <p>Gestión de usuarios y configuración del sistema.</p>
+      
+      <h3>Crear Nuevo Usuario</h3>
+      <form id="form-crear-usuario" class="form-horizontal">
+        <input type="text" id="nuevo-nombre" placeholder="Nombre completo" required>
+        <input type="text" id="nuevo-usuario" placeholder="Usuario (login)" required>
+        <select id="nuevo-rol" required>
+          <option value="">Seleccione rol...</option>
+          <option value="docente">Docente</option>
+          <option value="estudiante">Estudiante / Familia</option>
+        </select>
+        <button type="submit" class="btn-primario">Guardar Usuario</button>
+      </form>
+    </section>
+
+    <!-- 3. Panel de Docente -->
+    <section id="panel-docente" class="tarjeta vista-panel oculta">
+      <h2>Panel del Docente</h2>
+      <p>Registro y control de notas académicas.</p>
+
+      <h3>Ingresar Calificación</h3>
+      <form id="form-notas" class="form-horizontal">
+        <input type="text" id="nota-estudiante" placeholder="Nombre del Estudiante" required>
+        <input type="text" id="nota-materia" placeholder="Materia (ej. Matemática)" required>
+        <input type="number" id="nota-valor" step="0.1" min="1" max="10" placeholder="Nota (1-10)" required>
+        <button type="submit" class="btn-primario">Guardar Nota</button>
+      </form>
+    </section>
+
+    <!-- 4. Panel de Estudiante / Familia -->
+    <section id="panel-estudiante" class="tarjeta vista-panel oculta">
+      <h2>Panel de Estudiante y Familia</h2>
+      <p>Consulta de boletín de notas y circulares.</p>
+
+      <h3>Mis Calificaciones</h3>
+      <table class="tabla-datos">
+        <thead>
+          <tr>
+            <th>Estudiante</th>
+            <th>Materia</th>
+            <th>Calificación</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-notas-body">
+          <tr>
+            <td>Lucía Fernández</td>
+            <td>Matemáticas</td>
+            <td><strong>9.0</strong></td>
+          </tr>
+          <tr>
+            <td>Lucía Fernández</td>
+            <td>Español</td>
+            <td><strong>8.5</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 5. Secciones comunes: Tablón de Comunicados -->
+    <section id="seccion-comunicados" class="tarjeta vista-panel oculta">
+      <h2>📢 Tablón de Comunicados Oficiales</h2>
+      <article class="comunicado">
+        <h4>Reunión General de Padres de Familia</h4>
+        <small>Publicado: 12 de Agosto, 2026</small>
+        <p>Se convoca a todos los encargados legales a la asamblea del primer periodo el próximo viernes a las 5:00 PM.</p>
+      </article>
+      <article class="comunicado">
+        <h4>Mantenimiento de Plataforma</h4>
+        <small>Publicado: 10 de Agosto, 2026</small>
+        <p>El sistema estará en pausa programada durante el fin de semana por actualización de servidores.</p>
+      </article>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

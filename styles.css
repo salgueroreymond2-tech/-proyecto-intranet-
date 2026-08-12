@@ -1,0 +1,136 @@
+:root {
+  --color-primario: #0056b3;
+  --color-hover: #003d80;
+  --color-fondo: #f4f6f9;
+  --color-texto: #212529;
+  --color-tarjeta: #ffffff;
+  --border-radius: 8px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.header-principal {
+  background-color: var(--color-primario);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-principal h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.info-usuario {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.contenedor-principal {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.tarjeta {
+  background-color: var(--color-tarjeta);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.campo {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-horizontal {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.form-horizontal input, .form-horizontal select {
+  flex: 1;
+  min-width: 150px;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.btn-primario {
+  background-color: var(--color-primario);
+  color: white;
+}
+
+.btn-primario:hover {
+  background-color: var(--color-hover);
+}
+
+.btn-secundario {
+  background-color: #dc3545;
+  color: white;
+}
+
+.tabla-datos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.tabla-datos th, .tabla-datos td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tabla-datos th {
+  background-color: var(--color-fondo);
+}
+
+.oculta {
+  display: none !important;
+}
+
+.nota-prueba {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #e9ecef;
+  border-left: 4px solid var(--color-primario);
+  font-size: 0.9rem;
+}
+
+.comunicado {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+}
