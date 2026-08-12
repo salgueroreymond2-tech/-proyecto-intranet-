@@ -1,11 +1,19 @@
-// Base de datos de usuarios simulada
-const usuariosRegistrados = {
-  "admin": { nombre: "Administrador General", rol: "admin", pass: "1234" },
-  "docente1": { nombre: "Prof. Carlos Mendoza", rol: "docente", pass: "1234" },
-  "alumno1": { nombre: "Lucía Fernández", rol: "estudiante", pass: "1234" }
-};
+// 1. ESTRUCTURA DE DATOS MEDIANTE ARRAYS DE OBJETOS
+const listaUsuarios = [
+  { user: "admin", nombre: "Administrador General", rol: "admin", pass: "1234" },
+  { user: "docente1", nombre: "Prof. Carlos Mendoza", rol: "docente", pass: "1234" },
+  { user: "alumno1", nombre: "Lucía Fernández", rol: "estudiante", pass: "1234" }
+];
 
-// Referencias de elementos del DOM
+const listaNotas = [
+  { estudiante: "Lucía Fernández", materia: "Matemáticas", nota: "9.0" },
+  { estudiante: "Lucía Fernández", materia: "Español", nota: "8.5" }
+];
+
+// Variable para rastrear qué usuario se está editando directamente en la tabla
+let usuarioEnEdicion = null;
+
+// Elementos del DOM
 const formLogin = document.getElementById("form-login");
 const vistaLogin = document.getElementById("vista-login");
 const infoUsuario = document.getElementById("info-usuario");
@@ -20,25 +28,37 @@ const seccionComunicados = document.getElementById("seccion-comunicados");
 
 const formCrearUsuario = document.getElementById("form-crear-usuario");
 const formNotas = document.getElementById("form-notas");
+const tablaUsuariosBody = document.getElementById("tabla-usuarios-body");
 const tablaNotasBody = document.getElementById("tabla-notas-body");
+const mensajeFeedback = document.getElementById("mensaje-feedback");
 
-// 1. EVENTO: Iniciar Sesión
+// Función para mostrar mensajes visuales en la pantalla (Sin alert)
+function mostrarNotificacion(texto, esError = false) {
+  mensajeFeedback.textContent = texto;
+  mensajeFeedback.className = `mensaje-banner ${esError ? 'mensaje-error' : 'mensaje-exito'}`;
+  
+  setTimeout(() => {
+    mensajeFeedback.className = "mensaje-banner oculta";
+  }, 4000);
+}
+
+// 2. INICIAR SESIÓN
 formLogin.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const userInput = document.getElementById("usuario").value.trim().toLowerCase();
   const passInput = document.getElementById("password").value.trim();
 
-  const usuarioEncontrado = usuariosRegistrados[userInput];
+  // Búsqueda dentro del Array mediante find()
+  const usuarioEncontrado = listaUsuarios.find(u => u.user === userInput);
 
   if (usuarioEncontrado && usuarioEncontrado.pass === passInput) {
     cargarEntorno(usuarioEncontrado);
   } else {
-    alert("Usuario o contraseña incorrectos.");
+    mostrarNotificacion("Usuario o contraseña incorrectos.", true);
   }
 });
 
-// Función para cambiar de vista según el Rol
 function cargarEntorno(usuario) {
   vistaLogin.classList.add("oculta");
   infoUsuario.classList.remove("oculta");
@@ -46,141 +66,171 @@ function cargarEntorno(usuario) {
   nombreUsuarioSpan.textContent = usuario.nombre;
   rolUsuarioSpan.textContent = usuario.rol.toUpperCase();
 
-  // El tablón siempre se muestra
   seccionComunicados.classList.remove("oculta");
 
-  // Mostrar el panel adecuado
   if (usuario.rol === "admin") {
     panelAdmin.classList.remove("oculta");
+    renderizarTablaUsuarios();
   } else if (usuario.rol === "docente") {
     panelDocente.classList.remove("oculta");
   } else if (usuario.rol === "estudiante") {
     panelEstudiante.classList.remove("oculta");
+    renderizarTablaNotas();
   }
 }
 
-// 2. EVENTO: Crear Usuario (Panel Admin)
+// 3. TABLA DE USUARIOS (ADMIN) - RENDERIZADO Y EDICIÓN EN LÍNEA (SIN PROMPT)
+function renderizarTablaUsuarios() {
+  tablaUsuariosBody.innerHTML = "";
+
+  listaUsuarios.forEach((item) => {
+    const fila = document.createElement("tr");
+
+    // Si la fila está en modo edición, dibuja inputs en lugar de texto
+    if (usuarioEnEdicion === item.user) {
+      fila.innerHTML = `
+        <td><code>${item.user}</code></td>
+        <td><input type="text" id="edit-nombre-${item.user}" class="input-inline" value="${item.nombre}"></td>
+        <td>
+          <select id="edit-rol-${item.user}" class="input-inline">
+            <option value="docente" ${item.rol === 'docente' ? 'selected' : ''}>Docente</option>
+            <option value="estudiante" ${item.rol === 'estudiante' ? 'selected' : ''}>Estudiante</option>
+          </select>
+        </td>
+        <td>
+          <button type="button" class="btn-primario" onclick="guardarEdicion('${item.user}')" style="padding: 2px 8px; font-size: 0.8rem;">Guardar</button>
+          <button type="button" class="btn-secundario" onclick="cancelarEdicion()" style="padding: 2px 8px; font-size: 0.8rem;">Cancelar</button>
+        </td>
+      `;
+    } else {
+      fila.innerHTML = `
+        <td><code>${item.user}</code></td>
+        <td>${item.nombre}</td>
+        <td>${item.rol}</td>
+        <td>
+          <button type="button" class="btn-primario" onclick="activarEdicion('${item.user}')" style="padding: 2px 8px; font-size: 0.8rem;">Editar</button>
+          <button type="button" class="btn-secundario" onclick="eliminarUsuario('${item.user}')" style="padding: 2px 8px; font-size: 0.8rem;">Baja</button>
+        </td>
+      `;
+    }
+    tablaUsuariosBody.appendChild(fila);
+  });
+}
+
+// Funciones de gestión de usuarios desde Array
+function activarEdicion(userKey) {
+  usuarioEnEdicion = userKey;
+  renderizarTablaUsuarios();
+}
+
+function cancelarEdicion() {
+  usuarioEnEdicion = null;
+  renderizarTablaUsuarios();
+}
+
+function guardarEdicion(userKey) {
+  const nuevoNombre = document.getElementById(`edit-nombre-${userKey}`).value.trim();
+  const nuevoRol = document.getElementById(`edit-rol-${userKey}`).value;
+
+  if (nuevoNombre === "") {
+    mostrarNotificacion("El nombre no puede estar vacío.", true);
+    return;
+  }
+
+  // Actualiza el elemento dentro del Array de usuarios
+  const usuarioObj = listaUsuarios.find(u => u.user === userKey);
+  if (usuarioObj) {
+    usuarioObj.nombre = nuevoNombre;
+    usuarioObj.rol = nuevoRol;
+  }
+
+  usuarioEnEdicion = null;
+  renderizarTablaUsuarios();
+  mostrarNotificacion("Usuario actualizado correctamente.");
+}
+
+function eliminarUsuario(userKey) {
+  if (userKey === "admin") {
+    mostrarNotificacion("No se puede eliminar el usuario administrador principal.", true);
+    return;
+  }
+
+  // Filtrar el Array eliminando el elemento seleccionado
+  const indice = listaUsuarios.findIndex(u => u.user === userKey);
+  if (indice !== -1) {
+    listaUsuarios.splice(indice, 1);
+    renderizarTablaUsuarios();
+    mostrarNotificacion(`Usuario "${userKey}" dado de baja correctamente.`);
+  }
+}
+
+// Agregar nuevo usuario al Array
 formCrearUsuario.addEventListener("submit", (e) => {
-  e.preventDefault(); // Previene redirigir a inicio de sesión
+  e.preventDefault();
 
   const nombre = document.getElementById("nuevo-nombre").value.trim();
   const usuarioKey = document.getElementById("nuevo-usuario").value.trim().toLowerCase();
   const rol = document.getElementById("nuevo-rol").value;
 
-  // Validación de duplicados
-  if (usuariosRegistrados[usuarioKey]) {
-    alert(`El usuario "${usuarioKey}" ya existe. Intente con otro nombre de usuario.`);
+  if (listaUsuarios.some(u => u.user === usuarioKey)) {
+    mostrarNotificacion(`El nombre de usuario "${usuarioKey}" ya existe.`, true);
     return;
   }
 
-  // Registra el nuevo usuario
-  usuariosRegistrados[usuarioKey] = {
+  // Insertar en Array
+  listaUsuarios.push({
+    user: usuarioKey,
     nombre: nombre,
     rol: rol,
     pass: "1234"
-  };
+  });
 
-  alert(`¡Usuario guardado con éxito!\nNombre: ${nombre}\nUsuario: ${usuarioKey}\nContraseña: 1234`);
+  renderizarTablaUsuarios();
+  mostrarNotificacion(`Usuario "${nombre}" guardado con éxito (Pass: 1234).`);
   formCrearUsuario.reset();
 });
 
-// 3. EVENTO: Guardar Nota (Panel Docente)
+// 4. NOTAS Y CALIFICACIONES EN ARRAY
 formNotas.addEventListener("submit", (e) => {
-  e.preventDefault(); // Previene redirigir a inicio de sesión
+  e.preventDefault();
 
   const estudiante = document.getElementById("nota-estudiante").value.trim();
   const materia = document.getElementById("nota-materia").value.trim();
   const valorNota = document.getElementById("nota-valor").value.trim();
 
-  // Crear nueva fila para la tabla del estudiante
-  const nuevaFila = document.createElement("tr");
-  nuevaFila.innerHTML = `
-    <td>${estudiante}</td>
-    <td>${materia}</td>
-    <td><strong>${valorNota}</strong></td>
-  `;
+  // Guardar objeto en el Array de notas
+  listaNotas.push({
+    estudiante: estudiante,
+    materia: materia,
+    nota: valorNota
+  });
 
-  // Agregar la fila a la tabla
-  tablaNotasBody.appendChild(nuevaFila);
-
-  alert(`Calificación guardada exitosamente para ${estudiante}.`);
+  mostrarNotificacion(`Calificación registrada correctamente para ${estudiante}.`);
   formNotas.reset();
 });
 
-// 4. EVENTO: Cerrar Sesión
+function renderizarTablaNotas() {
+  tablaNotasBody.innerHTML = "";
+  listaNotas.forEach((item) => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${item.estudiante}</td>
+      <td>${item.materia}</td>
+      <td><strong>${item.nota}</strong></td>
+    `;
+    tablaNotasBody.appendChild(fila);
+  });
+}
+
+// 5. CERRAR SESIÓN
 btnLogout.addEventListener("click", () => {
-  // Ocultar todos los paneles
   panelAdmin.classList.add("oculta");
   panelDocente.classList.add("oculta");
   panelEstudiante.classList.add("oculta");
   seccionComunicados.classList.add("oculta");
   infoUsuario.classList.add("oculta");
 
-  // Limpiar y mostrar pantalla de Login
   formLogin.reset();
   vistaLogin.classList.remove("oculta");
-});
-const tablaUsuariosBody = document.getElementById("tabla-usuarios-body");
-
-// Función para renderizar la lista de usuarios en el Panel Admin
-function actualizarTablaUsuarios() {
-  if (!tablaUsuariosBody) return;
-  tablaUsuariosBody.innerHTML = "";
-
-  Object.keys(usuariosRegistrados).forEach((userKey) => {
-    const user = usuariosRegistrados[userKey];
-    const fila = document.createElement("tr");
-
-    fila.innerHTML = `
-      <td><code>${userKey}</code></td>
-      <td>${user.nombre}</td>
-      <td>${user.rol}</td>
-      <td>
-        <button type="button" class="btn-primario" onclick="editarUsuario('${userKey}')" style="padding: 2px 8px; font-size: 0.8rem;">Editar</button>
-        <button type="button" class="btn-secundario" onclick="eliminarUsuario('${userKey}')" style="padding: 2px 8px; font-size: 0.8rem;">Baja</button>
-      </td>
-    `;
-    tablaUsuariosBody.appendChild(fila);
-  });
-}
-
-// Renderizar tabla al cargar entorno de admin
-const cargarEntornoOriginal = cargarEntorno;
-cargarEntorno = function(usuario) {
-  cargarEntornoOriginal(usuario);
-  if (usuario.rol === "admin") {
-    actualizarTablaUsuarios();
-  }
-};
-
-// Función para BAJA de usuario
-function eliminarUsuario(userKey) {
-  if (userKey === "admin") {
-    alert("No se puede dar de baja al administrador principal.");
-    return;
-  }
-
-  if (confirm(`¿Está seguro de dar de baja al usuario "${userKey}"?`)) {
-    delete usuariosRegistrados[userKey];
-    actualizarTablaUsuarios();
-    alert("Usuario eliminado correctamente.");
-  }
-}
-
-// Función para EDICIÓN de usuario
-function editarUsuario(userKey) {
-  const user = usuariosRegistrados[userKey];
-  const nuevoNombre = prompt("Editar Nombre completo:", user.nombre);
-
-  if (nuevoNombre !== null && nuevoNombre.trim() !== "") {
-    usuariosRegistrados[userKey].nombre = nuevoNombre.trim();
-    actualizarTablaUsuarios();
-    alert("Usuario actualizado con éxito.");
-  }
-}
-
-// Actualizar tabla cuando se cree un nuevo usuario
-formCrearUsuario.addEventListener("submit", (e) => {
-  // ... (tu código previo de validación y registro) ...
-  actualizarTablaUsuarios(); // Inserta esta línea al final del evento
+  usuarioEnEdicion = null;
 });
