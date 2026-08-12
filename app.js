@@ -120,3 +120,67 @@ btnLogout.addEventListener("click", () => {
   formLogin.reset();
   vistaLogin.classList.remove("oculta");
 });
+const tablaUsuariosBody = document.getElementById("tabla-usuarios-body");
+
+// Función para renderizar la lista de usuarios en el Panel Admin
+function actualizarTablaUsuarios() {
+  if (!tablaUsuariosBody) return;
+  tablaUsuariosBody.innerHTML = "";
+
+  Object.keys(usuariosRegistrados).forEach((userKey) => {
+    const user = usuariosRegistrados[userKey];
+    const fila = document.createElement("tr");
+
+    fila.innerHTML = `
+      <td><code>${userKey}</code></td>
+      <td>${user.nombre}</td>
+      <td>${user.rol}</td>
+      <td>
+        <button type="button" class="btn-primario" onclick="editarUsuario('${userKey}')" style="padding: 2px 8px; font-size: 0.8rem;">Editar</button>
+        <button type="button" class="btn-secundario" onclick="eliminarUsuario('${userKey}')" style="padding: 2px 8px; font-size: 0.8rem;">Baja</button>
+      </td>
+    `;
+    tablaUsuariosBody.appendChild(fila);
+  });
+}
+
+// Renderizar tabla al cargar entorno de admin
+const cargarEntornoOriginal = cargarEntorno;
+cargarEntorno = function(usuario) {
+  cargarEntornoOriginal(usuario);
+  if (usuario.rol === "admin") {
+    actualizarTablaUsuarios();
+  }
+};
+
+// Función para BAJA de usuario
+function eliminarUsuario(userKey) {
+  if (userKey === "admin") {
+    alert("No se puede dar de baja al administrador principal.");
+    return;
+  }
+
+  if (confirm(`¿Está seguro de dar de baja al usuario "${userKey}"?`)) {
+    delete usuariosRegistrados[userKey];
+    actualizarTablaUsuarios();
+    alert("Usuario eliminado correctamente.");
+  }
+}
+
+// Función para EDICIÓN de usuario
+function editarUsuario(userKey) {
+  const user = usuariosRegistrados[userKey];
+  const nuevoNombre = prompt("Editar Nombre completo:", user.nombre);
+
+  if (nuevoNombre !== null && nuevoNombre.trim() !== "") {
+    usuariosRegistrados[userKey].nombre = nuevoNombre.trim();
+    actualizarTablaUsuarios();
+    alert("Usuario actualizado con éxito.");
+  }
+}
+
+// Actualizar tabla cuando se cree un nuevo usuario
+formCrearUsuario.addEventListener("submit", (e) => {
+  // ... (tu código previo de validación y registro) ...
+  actualizarTablaUsuarios(); // Inserta esta línea al final del evento
+});
