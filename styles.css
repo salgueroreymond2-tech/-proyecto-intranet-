@@ -3,15 +3,15 @@
    ========================================================================== */
 
 :root {
-  /* Paleta de Colores Académicos */
-  --color-brand-dark: #1e293b;      /* Azul marino profundo/pizarra */
-  --color-brand-primary: #1e3a8a;   /* Azul institucional (Navy) */
-  --color-brand-secondary: #3b82f6; /* Azul brillante (Acción) */
-  --color-brand-accent: #d97706;    /* Dorado/Ambar académico */
+  /* Paleta de Colores Académicos - Tema Morado / Púrpura */
+  --color-brand-dark: #2e1065;      /* Morado profundo pizarra */
+  --color-brand-primary: #5b21b6;   /* Morado institucional (Violets) */
+  --color-brand-secondary: #8b5cf6; /* Púrpura de acción brillante */
+  --color-brand-accent: #d97706;    /* Dorado/Ámbar académico */
   --color-brand-accent-hover: #b45309;
   
   /* Fondos y Superficies */
-  --color-bg-app: #f1f5f9;          /* Gris azulado ultra claro */
+  --color-bg-app: #f5f3ff;          /* Lavanda ultra claro */
   --color-bg-card: #ffffff;
   --color-bg-input: #f8fafc;
   
@@ -178,7 +178,7 @@ input, select, textarea {
 input:focus, select:focus, textarea:focus {
   outline: none;
   border-color: var(--color-brand-secondary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
   background-color: #ffffff;
 }
 
@@ -217,12 +217,12 @@ button:active {
 .btn-primario {
   background-color: var(--color-brand-primary);
   color: var(--color-text-on-brand);
-  box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(91, 33, 182, 0.2);
 }
 
 .btn-primario:hover {
   background-color: var(--color-brand-secondary);
-  box-shadow: 0 8px 12px -1px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 12px -1px rgba(139, 92, 246, 0.3);
 }
 
 .btn-secundario {
@@ -283,7 +283,7 @@ button:active {
 }
 
 .tabla-datos tr:hover td {
-  background-color: #eff6ff; /* Resaltado suave al pasar el cursor */
+  background-color: #f5f3ff; /* Resaltado suave en tono lavanda al pasar el cursor */
 }
 
 /* Visibilidad de vistas */
