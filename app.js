@@ -195,8 +195,8 @@ function actualizarTablaUsuarios() {
       <td>${user.nombre}</td>
       <td>${user.rol}</td>
       <td>
-        <button type="button" class="btn-primario" onclick="editarUsuario('${userKey}')" style="padding: 2px 8px; font-size: 0.8rem;">Editar</button>
-        <button type="button" class="btn-secundario" onclick="eliminarUsuario('${userKey}')" style="padding: 2px 8px; font-size: 0.8rem;">Baja</button>
+        <button type="button" class="btn-primario" onclick="editarUsuario('${userKey}')" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">edit</span> Editar</button>
+        <button type="button" class="btn-secundario" onclick="eliminarUsuario('${userKey}')" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Baja</button>
       </td>
     `;
     tablaUsuariosBody.appendChild(fila);
@@ -301,8 +301,8 @@ function actualizarTablasNotas() {
         <td>${n.materia}</td>
         <td><strong>${n.nota}</strong></td>
         <td>
-          <button type="button" class="btn-primario" onclick="editarNota(${n.id})" style="padding: 2px 8px; font-size: 0.8rem;">Editar</button>
-          <button type="button" class="btn-secundario" onclick="eliminarNota(${n.id})" style="padding: 2px 8px; font-size: 0.8rem;">Eliminar</button>
+          <button type="button" class="btn-primario" onclick="editarNota(${n.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">edit</span> Editar</button>
+          <button type="button" class="btn-secundario" onclick="eliminarNota(${n.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Eliminar</button>
         </td>
       `;
       tablaGestionNotasBody.appendChild(fila);
@@ -417,9 +417,9 @@ function actualizarComunicados() {
     let botonesAdmin = "";
     if (usuarioSesion && usuarioSesion.rol === "admin") {
       botonesAdmin = `
-        <div style="margin-top: 0.5rem;">
-          <button type="button" class="btn-primario" onclick="editarComunicado(${c.id})" style="padding: 2px 8px; font-size: 0.8rem; margin-right: 5px;">Editar</button>
-          <button type="button" class="btn-secundario" onclick="eliminarComunicado(${c.id})" style="padding: 2px 8px; font-size: 0.8rem;">Eliminar</button>
+        <div style="margin-top: 0.75rem;">
+          <button type="button" class="btn-primario" onclick="editarComunicado(${c.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; margin-right: 5px;"><span class="material-symbols-outlined" style="font-size: 1rem;">edit</span> Editar</button>
+          <button type="button" class="btn-secundario" onclick="eliminarComunicado(${c.id})" style="padding: 4px 8px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-outlined" style="font-size: 1rem;">delete</span> Eliminar</button>
         </div>
       `;
     }

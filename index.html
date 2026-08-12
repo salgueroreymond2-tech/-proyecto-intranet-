@@ -57,10 +57,10 @@
 
     <!-- 2. Panel de Administración -->
     <section id="panel-admin" class="tarjeta vista-panel oculta">
-      <h2>Panel de Administración</h2>
+      <h2 style="display: inline-flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 1.8rem; color: var(--color-brand-primary);">admin_panel_settings</span> Panel de Administración</h2>
       <p>Gestión de usuarios y configuración del sistema.</p>
       
-      <h3>Crear Nuevo Usuario</h3>
+      <h3 style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.3rem;">person_add</span> Crear Nuevo Usuario</h3>
       <form id="form-crear-usuario" class="form-horizontal">
         <input type="text" id="nuevo-nombre" placeholder="Nombre completo" required>
         <input type="text" id="nuevo-usuario" placeholder="Usuario (login)" required>
@@ -69,12 +69,12 @@
           <option value="docente">Docente</option>
           <option value="estudiante">Estudiante / Familia</option>
         </select>
-        <button type="submit" class="btn-primario">Guardar Usuario</button>
+        <button type="submit" class="btn-primario" style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.2rem;">save</span> Guardar Usuario</button>
       </form>
 
       <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #ddd;">
-
-      <h3>Gestión de Usuarios</h3>
+ 
+      <h3 style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.3rem;">group</span> Gestión de Usuarios</h3>
       <table class="tabla-datos">
         <thead>
           <tr>
@@ -91,8 +91,8 @@
 
       <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #ddd;">
 
-      <h3>Gestión de Calificaciones (Historial de Notas)</h3>
-      <p style="font-size: 0.9rem; color: #666;">Como Administrador, puede editar o corregir cualquier calificación registrada por los docentes.</p>
+      <h3 style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.3rem;">analytics</span> Gestión de Calificaciones (Historial de Notas)</h3>
+      <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Como Administrador, puede editar o corregir cualquier calificación registrada por los docentes.</p>
       <table class="tabla-datos">
         <thead>
           <tr>
@@ -110,24 +110,24 @@
 
     <!-- 3. Panel de Docente -->
     <section id="panel-docente" class="tarjeta vista-panel oculta">
-      <h2>Panel del Docente</h2>
+      <h2 style="display: inline-flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 1.8rem; color: var(--color-brand-primary);">menu_book</span> Panel del Docente</h2>
       <p>Registro y control de notas académicas.</p>
-
-      <h3>Ingresar Calificación</h3>
+ 
+      <h3 style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.3rem;">edit_document</span> Ingresar Calificación</h3>
       <form id="form-notas" class="form-horizontal">
         <input type="text" id="nota-estudiante" placeholder="Nombre del Estudiante" required>
         <input type="text" id="nota-materia" placeholder="Materia (ej. Matemática)" required>
         <input type="number" id="nota-valor" step="0.1" min="1" max="10" placeholder="Nota (1-10)" required>
-        <button type="submit" class="btn-primario">Guardar Nota</button>
+        <button type="submit" class="btn-primario" style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.2rem;">save</span> Guardar Nota</button>
       </form>
     </section>
-
+ 
     <!-- 4. Panel de Estudiante / Familia -->
     <section id="panel-estudiante" class="tarjeta vista-panel oculta">
-      <h2>Panel de Estudiante y Familia</h2>
+      <h2 style="display: inline-flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 1.8rem; color: var(--color-brand-primary);">school</span> Panel de Estudiante y Familia</h2>
       <p>Consulta de boletín de notas y circulares.</p>
-
-      <h3>Mis Calificaciones</h3>
+ 
+      <h3 style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.3rem;">analytics</span> Mis Calificaciones</h3>
       <table class="tabla-datos">
         <thead>
           <tr>
@@ -144,9 +144,9 @@
 
     <!-- 5. Secciones comunes: Tablón de Comunicados -->
     <section id="seccion-comunicados" class="tarjeta vista-panel oculta">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px;">
-        <h2 style="margin: 0;">📢 Tablón de Comunicados Oficiales</h2>
-        <button id="btn-nuevo-comunicado" type="button" class="btn-primario oculta" onclick="crearComunicado()">+ Nuevo Comunicado</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;">
+        <h2 style="margin: 0; display: inline-flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 1.8rem; color: var(--color-brand-primary);">campaign</span> Tablón de Comunicados Oficiales</h2>
+        <button id="btn-nuevo-comunicado" type="button" class="btn-primario oculta" onclick="crearComunicado()" style="display: inline-flex; align-items: center; gap: 6px;"><span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span> Nuevo Comunicado</button>
       </div>
       <div id="contenedor-comunicados">
         <!-- Carga dinámicamente desde el Array -->
