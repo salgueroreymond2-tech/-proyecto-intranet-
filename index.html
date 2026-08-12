@@ -19,6 +19,9 @@
 
   <main class="contenedor-principal">
 
+    <!-- Mensaje de Feedback Visual (Sustituye a los alerts) -->
+    <div id="mensaje-feedback" class="mensaje-banner oculta"></div>
+
     <!-- 1. Pantalla de Login -->
     <section id="vista-login" class="tarjeta">
       <h2>Iniciar Sesión</h2>
@@ -34,7 +37,6 @@
         <button type="submit" class="btn-primario">Ingresar</button>
       </form>
 
-      <!-- Guía rápida de pruebas -->
       <div class="nota-prueba">
         <p><strong>Cuentas de prueba (Password: 1234):</strong></p>
         <ul>
@@ -61,6 +63,23 @@
         </select>
         <button type="submit" class="btn-primario">Guardar Usuario</button>
       </form>
+
+      <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #ddd;">
+
+      <h3>Gestión de Usuarios</h3>
+      <table class="tabla-datos">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Nombre Completo</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-usuarios-body">
+          <!-- Carga dinámicamente desde el Array -->
+        </tbody>
+      </table>
     </section>
 
     <!-- 3. Panel de Docente -->
@@ -92,16 +111,7 @@
           </tr>
         </thead>
         <tbody id="tabla-notas-body">
-          <tr>
-            <td>Lucía Fernández</td>
-            <td>Matemáticas</td>
-            <td><strong>9.0</strong></td>
-          </tr>
-          <tr>
-            <td>Lucía Fernández</td>
-            <td>Español</td>
-            <td><strong>8.5</strong></td>
-          </tr>
+          <!-- Carga dinámicamente desde el Array -->
         </tbody>
       </table>
     </section>
@@ -120,21 +130,7 @@
         <p>El sistema estará en pausa programada durante el fin de semana por actualización de servidores.</p>
       </article>
     </section>
-<!-- Dentro de #panel-admin -->
-<h3>Lista de Usuarios Registrados</h3>
-<table class="tabla-datos">
-  <thead>
-    <tr>
-      <th>Usuario</th>
-      <th>Nombre</th>
-      <th>Rol</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="tabla-usuarios-body">
-    <!-- Se llena dinámicamente con JavaScript -->
-  </tbody>
-</table>
+
   </main>
 
   <script src="app.js"></script>
