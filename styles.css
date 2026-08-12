@@ -1,0 +1,376 @@
+/* ==========================================================================
+   DISEÑO PROFESIONAL DE INTRANET ESCOLAR (TEMA ACADÉMICO / COLEGIAL)
+   ========================================================================== */
+
+:root {
+  /* Paleta de Colores Académicos - Tema Morado / Púrpura */
+  --color-brand-dark: #2e1065;      /* Morado profundo pizarra */
+  --color-brand-primary: #5b21b6;   /* Morado institucional (Violets) */
+  --color-brand-secondary: #8b5cf6; /* Púrpura de acción brillante */
+  --color-brand-accent: #d97706;    /* Dorado/Ámbar académico */
+  --color-brand-accent-hover: #b45309;
+  
+  /* Fondos y Superficies */
+  --color-bg-app: #f5f3ff;          /* Lavanda ultra claro */
+  --color-bg-card: #ffffff;
+  --color-bg-input: #f8fafc;
+  
+  /* Estados */
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  
+  /* Textos */
+  --color-text-dark: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-on-brand: #ffffff;
+  
+  /* Bordes y Sombras Premium */
+  --border-radius-lg: 16px;
+  --border-radius-md: 10px;
+  --border-radius-sm: 6px;
+  --border-color: #e2e8f0;
+  
+  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+  --shadow-hover: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -6px rgba(15, 23, 42, 0.1);
+  --shadow-input: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  
+  /* Tipografía */
+  --font-family-headings: 'Outfit', sans-serif;
+  --font-family-body: 'Inter', sans-serif;
+}
+
+/* Reset de Estilos Básicos */
+body {
+  font-family: var(--font-family-body);
+  background-color: var(--color-bg-app);
+  color: var(--color-text-dark);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-headings);
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  margin-top: 0;
+}
+
+/* Header Institucional */
+.header-principal {
+  background: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-dark) 100%);
+  color: var(--color-text-on-brand);
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+  border-bottom: 4px solid var(--color-brand-accent);
+}
+
+.header-principal h1 {
+  color: var(--color-text-on-brand);
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Área de Usuario en el Header */
+.info-usuario {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.info-usuario span {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.info-usuario strong {
+  background-color: var(--color-brand-accent);
+  color: var(--color-brand-dark);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* Contenedor de la Intranet */
+.contenedor-principal {
+  max-width: 1050px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Tarjetas (Cards) de Interfaz */
+.tarjeta {
+  background-color: var(--color-bg-card);
+  padding: 2.25rem;
+  margin-bottom: 2rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.tarjeta h2 {
+  font-size: 1.6rem;
+  border-bottom: 2px solid var(--color-bg-app);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tarjeta h3 {
+  font-size: 1.25rem;
+  color: var(--color-text-dark);
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+/* Formularios Elegantes */
+.campo {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  box-sizing: border-box;
+  font-family: var(--font-family-body);
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  box-shadow: var(--shadow-input);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-brand-secondary);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  background-color: #ffffff;
+}
+
+/* Formularios Horizontales */
+.form-horizontal {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+.form-horizontal button {
+  height: 44px;
+}
+
+/* Botones Premium */
+button {
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: var(--font-family-body);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.btn-primario {
+  background-color: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+  box-shadow: 0 4px 6px -1px rgba(91, 33, 182, 0.2);
+}
+
+.btn-primario:hover {
+  background-color: var(--color-brand-secondary);
+  box-shadow: 0 8px 12px -1px rgba(139, 92, 246, 0.3);
+}
+
+.btn-secundario {
+  background-color: #f1f5f9;
+  color: var(--color-text-dark);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secundario:hover {
+  background-color: #e2e8f0;
+}
+
+/* Modificadores de botones para acciones directas */
+.btn-danger {
+  background-color: var(--color-danger);
+  color: white;
+}
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+/* Tablas Modernas */
+.tabla-datos {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1.25rem;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.tabla-datos th {
+  background-color: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 1rem 1.25rem;
+  text-align: left;
+}
+
+.tabla-datos td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+}
+
+.tabla-datos tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla-datos tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+.tabla-datos tr:hover td {
+  background-color: #f5f3ff; /* Resaltado suave en tono lavanda al pasar el cursor */
+}
+
+/* Visibilidad de vistas */
+.oculta {
+  display: none !important;
+}
+
+/* Tarjeta de Pruebas (Login Info) */
+.nota-prueba {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background-color: #fef3c7;
+  border-left: 5px solid var(--color-brand-accent);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  color: #92400e;
+}
+
+.nota-prueba p {
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.nota-prueba ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.nota-prueba code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* Tablón de Anuncios / Comunicados */
+.comunicado {
+  background-color: #f8fafc;
+  border-left: 4px solid var(--color-brand-secondary);
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  transition: transform 0.2s ease, border-left-color 0.2s ease;
+}
+
+.comunicado:hover {
+  transform: translateX(4px);
+  border-left-color: var(--color-brand-accent);
+}
+
+.comunicado h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-brand-primary);
+  font-size: 1.15rem;
+}
+
+.comunicado small {
+  display: block;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.comunicado p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+}
+
+/* Elementos divisorios */
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(226, 232, 240, 1), rgba(0, 0, 0, 0));
+  margin: 2rem 0;
+}
+
+/* Estilización específica de SweetAlert2 para combinar con la marca */
+.swal2-popup {
+  font-family: var(--font-family-body) !important;
+  border-radius: var(--border-radius-lg) !important;
+}
+
+.swal2-title {
+  font-family: var(--font-family-headings) !important;
+  font-weight: 700 !important;
+}
