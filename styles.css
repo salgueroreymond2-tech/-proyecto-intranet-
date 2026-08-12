@@ -80,11 +80,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: 10px;
 }
 
-.header-principal h1::before {
-  content: "🏫";
-  font-size: 1.9rem;
-}
-
 /* Área de Usuario en el Header */
 .info-usuario {
   display: flex;
