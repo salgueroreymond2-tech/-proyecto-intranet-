@@ -101,6 +101,7 @@ formCrearUsuario.addEventListener("submit", (e) => {
 
   const nombre = document.getElementById("nuevo-nombre").value.trim();
   const usuarioKey = document.getElementById("nuevo-usuario").value.trim().toLowerCase();
+  const password = document.getElementById("nuevo-password").value.trim();
   const rol = document.getElementById("nuevo-rol").value;
 
   // Validación de duplicados
@@ -109,23 +110,23 @@ formCrearUsuario.addEventListener("submit", (e) => {
       icon: 'warning',
       title: 'Usuario Duplicado',
       text: `El usuario "${usuarioKey}" ya existe. Intente con otro nombre de usuario.`,
-      confirmButtonColor: '#4f46e5'
+      confirmButtonColor: '#5b21b6'
     });
     return;
   }
 
-  // Registra el nuevo usuario
+  // Registra el nuevo usuario con la contraseña ingresada
   usuariosRegistrados[usuarioKey] = {
     nombre: nombre,
     rol: rol,
-    pass: "1234"
+    pass: password
   };
 
   Swal.fire({
     icon: 'success',
     title: '¡Usuario guardado con éxito!',
-    html: `<strong>Nombre:</strong> ${nombre}<br><strong>Usuario:</strong> ${usuarioKey}<br><strong>Contraseña:</strong> 1234`,
-    confirmButtonColor: '#4f46e5'
+    html: `<strong>Nombre:</strong> ${nombre}<br><strong>Usuario:</strong> ${usuarioKey}<br><strong>Rol:</strong> ${rol}`,
+    confirmButtonColor: '#5b21b6'
   });
   
   formCrearUsuario.reset();
